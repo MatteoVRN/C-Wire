@@ -103,7 +103,7 @@ do
                         echo "Exécution du tri selon la colonne Company"
                         cut -d';' -f1,2,4,5 hva.csv | sort -n -t';' -k1 > temp_hva_comp.csv
                         echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        #manque le calcul pour permettre de voir combien chaque HVA a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace à la commande awk 
+                        #manque le calcul pour permettre de voir combien chaque HVA a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL  
                         ;;
                     -indiv) 
                         echo "Cette commande ne peut pas être appliqué"
@@ -134,13 +134,13 @@ do
                         echo "Exécution du tri selon la colonne Company"
                         cut -d';' -f1,2,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_comp.csv
                         echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace à la commande awk 
+                        #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL
                         ;;
                     -indiv) 
                         echo "Exécution du tri selon la colonne Individual"
                         cut -d';' -f1,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_indiv.csv
                         echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
-                         #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace à la commande awk
+                         #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL
                         ;;
                     -all) 
                         echo "Exécution du tri selon la colonne Individual"
