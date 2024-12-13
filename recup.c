@@ -74,7 +74,47 @@ int min3(int a, int b, int c) {
     return (mi < c) ? mi : c;  
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+  //Ouverture des fichiers
+  FILE* fichier = NULL;
+  FILE* fichier1 = fopen("temp_hvb_comp.txt", "r");
+  FILE* fichier2 = fopen("temp_hva_comp.txt", "r");
+  FILE* fichier3 = fopen("temp_lv_comp.txt", "r");
+  FILE* fichier4 = fopen("temp_hvb_indiv.txt", "r");
+  
+  // Vérifie si un argument a été passé
+    if (argc < 2) {
+        printf("Aucun argument passé.\n");
+        return 1;
+    }
+    // On récupère l'argument passé
+    char *arg = argv[1];
+  
+    // Vérifie quel argument a été passé et fait l'action appropriée
+    if (strcmp(arg, "-hvb-comp") == 0) {
+        printf("Action pour l'argument -hvb-comp\n");
+        * fichier =  &fichier1
+    }
+    else if (strcmp(arg, "-hva_comp") == 0) {
+        printf("Action pour l'argument -hva_comp\n");
+        * fichier =  &fichier2
+    }
+    else if (strcmp(arg, "-lv-comp") == 0) {
+        printf("Action pour l'argument -lv-comp\n");
+        * fichier =  &fichier3
+    }
+    else if (strcmp(arg, "-lv-indiv") == 0) {
+        printf("Action pour l'argument -lv-indiv\n");
+        * fichier =  &fichier4
+    }
+    else {
+        printf("Argument inconnu: %s\n", arg);
+        return 1;
+    }
+
+    return 0;
+}
 
   int a;
   int b;
@@ -83,14 +123,6 @@ int main() {
   printf("start\n");
 
   Chainon * pliste = NULL;
-
-  //Ouverture des fichiers
-  FILE* fichier1 = fopen("temp_hvb_comp.txt", "r");
-  FILE* fichier2 = fopen("temp_hva_comp.txt", "r");
-  FILE* fichier3 = fopen("temp_lv_comp.txt", "r");
-  FILE* fichier4 = fopen("temp_hvb_indiv.txt", "r");
-
-  
   
   //On récurèpe les données du fichiers et on les insère dans une liste chainée grace à la commande fscanf
   while (fscanf(fichier, "%d", &a) == 1) {  
@@ -99,4 +131,4 @@ int main() {
     pliste = insertDebut(pliste, a, b, c);
   }
 
-
+}
