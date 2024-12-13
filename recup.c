@@ -6,9 +6,7 @@ typedef struct chainon {
   int ID;
   int capacity;
   int load;
-  struct chainon *fg;
-  struct chainon *fg;
-  int hauteur;
+  struct chainon * next;
 } Chainon;
 
 Chainon * creationChainon(int a, int b, int c) {
@@ -19,9 +17,7 @@ Chainon * creationChainon(int a, int b, int c) {
   d->ID = a;
   d->capacity = b;
   d->load=c
-  d->fg = NULL;
-  d->fd = NULL;
-  d->hauteur=NULL;
+  d->next = NULL;
   return d;
 }
 
