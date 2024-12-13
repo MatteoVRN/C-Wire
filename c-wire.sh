@@ -69,28 +69,14 @@ do
         #HV-B Station;Company;Individual;Capacity;Load
         #  1            2          3          4       5
 
-        #Lance une nouvelle boucle dans laquelle on regarde un nouvelle argument qui peut etre l'un des suivant COMPANY / INDIVIDUAL / ALL
-            for arg in "$@"
-                do 
-                    case "$arg" in
-                    -comp) 
-                        echo "Exécution du tri selon la colonne Company"
-                        cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
-                        echo "Le tri selon la colonne Station HVB et selon la company a été exécuté"
-                        ./yy 
-                        ;;
-
-                    -indiv) 
-                        echo "Cette commande ne peut pas être appliqué"
-                        exit 1
-                        ;;
-                    -all) 
-                        echo "Cette commande ne peut pas être appliqué"
-                        exit 1
-                        ;;
-                    esac
-                done
-      ;; 
+                   # Si l'argument -comp est présent
+            if [[ " $@ " =~ " -comp " ]]; then
+                echo "Exécution du tri selon la colonne Company"
+                cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
+                echo "Le tri par Company a été exécuté"
+                ./yy
+            fi
+            ;; 
 
     -hva)
         echo "Exécution du tri selon la colonne Station HVA"
