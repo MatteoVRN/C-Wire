@@ -1,10 +1,12 @@
 #!/bin/bash
 
-file_path=$(find .. -iname "data.csv") 2>/dev/null                                                                                      #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
+# Dans l'ensemble du projet on utilise exit 1 comme EXIT FAILURE ce qui indique que la tâche a été interrompue à cause d’une erreur.
 
-Graphs_path=$(find . -type d -name "Graphs" -print -quit) 2>/dev/null                                                                   #Cette ligne de commande permet de chercher si le dosier Graphs dans mes dossiers
+file_path=$(find .. -iname "data.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
 
-Temps_path=$(find . -type d -name "Temp" -print -quit) 2>/dev/null                                                                      #Cette ligne de commande permet de chercher le dossier Temps dans mes dossiers
+Graphs_path=$(find . -type d -name "Graphs" -print -quit) 2>/dev/null                                                                                               #Cette ligne de commande permet de chercher si le dosier Graphs dans mes dossiers
+
+Temps_path=$(find . -type d -name "Temp" -print -quit) 2>/dev/null                                                                                                  #Cette ligne de commande permet de chercher le dossier Temps dans mes dossiers
 
 
 chmod 777 c-wire.sh
@@ -45,7 +47,7 @@ if [ $# -eq 0 ]; then
 fi
 
 gcc -o yy ~/PartieC/AVL.c
-if [ $? -ne 0 ]; then
+if  ! yy ~/PartieC/AVL.c; then
     echo "Erreur lors de la compilation du programme C."
     exit 1
 fi
@@ -69,14 +71,21 @@ do
         #HV-B Station;Company;Individual;Capacity;Load
         #  1            2          3          4       5
 
-                   # Si l'argument -comp est présent
-            if [[ " $@ " =~ " -comp " ]]; then
-                echo "Exécution du tri selon la colonne Company"
-                cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
-                echo "Le tri par Company a été exécuté"
-                ./yy
+        # On regarde si l'argument -comp est a été inclu dans notre commande 
+        if [[ " $@ " =~ " -comp " ]]; then
+            echo "Exécution du tri selon la colonne Company"
+            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
+            echo "Le tri par Company a été exécuté"
+            # Lancement du programme C
+            ./yy 
+            break
+
+        # Sinon on indique que la commande n'existe pas et on exit 1 
+        else
+            echo "Cette commande ne peut pas être appliqué"
+            exit 1
             fi
-            ;; 
+        ;; 
 
     -hva)
         echo "Exécution du tri selon la colonne Station HVA"
@@ -88,27 +97,19 @@ do
         #HV-A Station;Company;Individual;Capacity;Load
         #  1            2          3          4       5
 
-        #Lance une nouvelle boucle dans laquelle on regarde un nouvelle argument qui peut etre l'un des suivant COMPANY / INDIVIDUAL / ALL
-            for arg in "$@"
-                do 
-                    case "$arg" in
-                    -comp) 
-                        echo "Exécution du tri selon la colonne Company"
-                        cut -d';' -f1,2,4,5 hva.csv | sort -n -t';' -k1 > temp_hva_comp.csv
-                        echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        ./yy  
-                        ;;
-                    -indiv) 
-                        echo "Cette commande ne peut pas être appliqué"
-                        exit 1
-                        ;;
-                    -all) 
-                        echo "Cette commande ne peut pas être appliqué"
-                        exit 1
-                        ;;
-                    esac
-                done
-      ;; 
+        if [[ " $@ " =~ " -comp " ]]; then
+            echo "Exécution du tri selon la colonne Company"
+            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hva_comp.csv
+            echo "Le tri par Company a été exécuté"
+            # Lancement du programme C
+            ./yy
+            break
+        # Sinon on indique que la commande n'existe pas et on exit 1 
+        else
+            echo "Cette commande ne peut pas être appliqué"
+            exit 1
+            fi
+        ;;
 
     -lv)
         echo "Exécution du tri selon la colonne Station LV"
@@ -119,31 +120,35 @@ do
         #LV Station;Company;Individual;Capacity;Load
         #  1            2          3          4       5
 
-        #Lance une nouvelle boucle dans laquelle on regarde un nouvelle argument qui peut etre l'un des suivant COMPANY / INDIVIDUAL / ALL
-            for arg in "$@"
-                do 
-                    case "$arg" in
-                    -comp) 
-                        echo "Exécution du tri selon la colonne Company"
-                        cut -d';' -f1,2,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_comp.csv
-                        echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        ./yy
-                        ;;
-                    -indiv) 
-                        echo "Exécution du tri selon la colonne Individual"
-                        cut -d';' -f1,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_indiv.csv
-                        echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
-                         ./yy
-                        ;;
-                    -all) 
-                        echo "Exécution du tri selon la colonne Individual"
-                        cut -d';' -f1,2,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_all.csv
-                        ./yy
-                        ;;
-                    esac
-                done 
-      ;; 
-
+        # On regarde si l'argument -comp est a été inclu dans notre commande
+        if [[ " $@ " =~ " -comp " ]]; then
+            echo "Exécution du tri selon la colonne Company"
+            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_lv_comp.csv
+            echo "Le tri par Company a été exécuté"
+            # Lancement du programme C
+            ./yy
+            break
+        # On regarde si l'argument -indiv est a été inclu dans notre commande
+        elif [[ " $@ " =~ " -indiv " ]]; then
+            echo "Exécution du tri selon la colonne Individual"
+            cut -d';' -f1,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_indiv.csv
+            echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
+            # Lancement du programme C
+            ./yy
+            break
+        # On regarde si l'argument -all est a été inclu dans notre commande
+        elif [[ " $@ " =~ " -all " ]]; then
+            echo "Exécution du tri selon la colonne Individual"
+            cut -d';' -f1,2,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_all.csv
+            ./yy
+            # Lancement du programme C
+            break
+        # Sinon on indique que la commande n'existe pas et on exit 1 
+        else
+            echo "Cette commande ne peut pas être appliqué"
+            exit 1
+            fi
+        ;;
 
     *)
       echo "Argument inconnu : $arg"
@@ -155,4 +160,3 @@ done
 end_time=$(date +%s.%s) 
 elapsed_time=$(echo "$end_time - $start_time" | bc)
 echo "Temps écoulé : $elapsed_time secondes"
-
