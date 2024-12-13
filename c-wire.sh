@@ -77,7 +77,7 @@ do
                         echo "Exécution du tri selon la colonne Company"
                         cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
                         echo "Le tri selon la colonne Station HVB et selon la company a été exécuté"
-                        #manque le calcul pour permettre de voir combien chaque HVB a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace à la commande awk 
+                        .yy 
                         ;;
 
                     -indiv) 
@@ -110,7 +110,7 @@ do
                         echo "Exécution du tri selon la colonne Company"
                         cut -d';' -f1,2,4,5 hva.csv | sort -n -t';' -k1 > temp_hva_comp.csv
                         echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        #manque le calcul pour permettre de voir combien chaque HVA a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL  
+                        .yy  
                         ;;
                     -indiv) 
                         echo "Cette commande ne peut pas être appliqué"
@@ -141,18 +141,18 @@ do
                         echo "Exécution du tri selon la colonne Company"
                         cut -d';' -f1,2,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_comp.csv
                         echo "Le tri selon la colonne Station HVA et selon la company a été exécuté"
-                        #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL
+                        .yy
                         ;;
                     -indiv) 
                         echo "Exécution du tri selon la colonne Individual"
                         cut -d';' -f1,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_indiv.csv
                         echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
-                         #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au code AVL
+                         .yy
                         ;;
                     -all) 
                         echo "Exécution du tri selon la colonne Individual"
                         cut -d';' -f1,2,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_all.csv
-                        #manque le calcul pour permettre de voir combien chaque LV a pour capacité de production et combien les entreprises utilises dans cette productions ce fait grace au programme C
+                        .yy
                         ;;
                     esac
                 done 
