@@ -2,7 +2,7 @@
 
 # Dans l'ensemble du projet on utilise exit 1 comme EXIT FAILURE ce qui indique que la tâche a été interrompue à cause d’une erreur.
 
-file_path=$(find . -iname "c-wire.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
+file_path=$(find . -iname "c-wire.csv") 2>/dev/null                                                                                                                 #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
 
 Graphs_path=$(find . -type d -name "Graphs" -print -quit) 2>/dev/null                                                                                               #Cette ligne de commande permet de chercher si le dosier Graphs dans mes dossiers
 
@@ -76,15 +76,21 @@ do
             echo "Exécution du tri selon la colonne Company"
             cut -d';' -f1,2,4,5 hvb.txt | sort -n -t';' -k1 > temp_hvb_comp.txt
             echo "Le tri par Company a été exécuté"
-            # Lancement du programme C
-            ./yy 
-            break
 
+                # Ici on essaye de mettre en parametre -hvb-comp pour pouvoir l'envoyer dans le programme en c 
+                if [[ " $@ " =~ " -hvb-comp " ]]; then
+                    echo "Exécution avec l'argument -hvb-comp"
+                    ./yy "-hvb-comp"
+                else
+                    echo "Argument inconnu ou manquant"
+                    exit 1
+                fi
+            
         # Sinon on indique que la commande n'existe pas et on exit 1 
         else
             echo "Cette commande ne peut pas être appliqué"
             exit 1
-            fi
+        fi
         ;; 
 
     -hva)
@@ -101,9 +107,16 @@ do
             echo "Exécution du tri selon la colonne Company"
             cut -d';' -f1,2,4,5 hva.txt | sort -n -t';' -k1 > temp_hva_comp.txt
             echo "Le tri par Company a été exécuté"
-            # Lancement du programme C
-            ./yy
-            break
+
+                # Ici on essaye de mettre en parametre -hva-comp pour pouvoir l'envoyer dans le programme en c 
+                if [[ " $@ " =~ " -hva-comp " ]]; then
+                    echo "Exécution avec l'argument -hva-comp"
+                    ./yy "-hva-comp"
+                else
+                    echo "Argument inconnu ou manquant"
+                    exit 1
+                fi
+            
         # Sinon on indique que la commande n'existe pas et on exit 1 
         else
             echo "Cette commande ne peut pas être appliqué"
@@ -125,24 +138,39 @@ do
             echo "Exécution du tri selon la colonne Company"
             cut -d';' -f1,2,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_comp.txt
             echo "Le tri par Company a été exécuté"
-            # Lancement du programme C
-            ./yy
-            break
+                # Ici on essaye de mettre en parametre -hvb-comp pour pouvoir l'envoyer dans le programme en c 
+                if [[ " $@ " =~ " -lv-comp " ]]; then
+                    echo "Exécution avec l'argument -hvb-comp"
+                    ./yy "-lv-comp"
+                else
+                    echo "Argument inconnu ou manquant"
+                    exit 1
+                fi
         # On regarde si l'argument -indiv est a été inclu dans notre commande
         elif [[ " $@ " =~ " -indiv " ]]; then
             echo "Exécution du tri selon la colonne Individual"
             cut -d';' -f1,3,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_indiv.txt
             echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
-            # Lancement du programme C
-            ./yy
-            break
+                # Ici on essaye de mettre en parametre -lv-indiv pour pouvoir l'envoyer dans le programme en c 
+                if [[ " $@ " =~ " -hvb-indiv " ]]; then
+                    echo "Exécution avec l'argument -hvb-indiv"
+                    ./yy "-lv-indiv"
+                else
+                    echo "Argument inconnu ou manquant"
+                    exit 1
+                fi
         # On regarde si l'argument -all est a été inclu dans notre commande
         elif [[ " $@ " =~ " -all " ]]; then
             echo "Exécution du tri selon la colonne Individual"
             cut -d';' -f1,2,3,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_all.txt
-            ./yy
-            # Lancement du programme C
-            break
+            # Ici on essaye de mettre en parametre -lv-comp pour pouvoir l'envoyer dans le programme en c 
+            if [[ " $@ " =~ " -lv-all " ]]; then
+               echo "Exécution avec l'argument -hvb-comp"
+               ./yy "-lv-all"
+            else
+                echo "Argument inconnu ou manquant"
+                exit 1
+            fi
         # Sinon on indique que la commande n'existe pas et on exit 1 
         else
             echo "Cette commande ne peut pas être appliqué"
