@@ -2,7 +2,7 @@
 
 # Dans l'ensemble du projet on utilise exit 1 comme EXIT FAILURE ce qui indique que la tâche a été interrompue à cause d’une erreur.
 
-file_path=$(find . -iname "data.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
+file_path=$(find . -iname "c-wire.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
 
 Graphs_path=$(find . -type d -name "Graphs" -print -quit) 2>/dev/null                                                                                               #Cette ligne de commande permet de chercher si le dosier Graphs dans mes dossiers
 
@@ -63,7 +63,7 @@ do
   case "$arg" in
     -hvb) 
         echo "Exécution du tri selon la colonne Station HVB"
-        cut -d';' -f2,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > hvb.csv
+        cut -d';' -f2,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > hvb.txt
         echo "Le tri selon la colonne Station HVB a été exécuté"
 
         #Lance la commande associé au fait de prendre que les colonnes suivantes  HVB / COMPANY / INDIVIDUAL / CAPACITY / LOAD et ressort un tableau nommé hvb.csv 
@@ -74,7 +74,7 @@ do
         # On regarde si l'argument -comp est a été inclu dans notre commande 
         if [[ " $@ " =~ " -comp " ]]; then
             echo "Exécution du tri selon la colonne Company"
-            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hvb_comp.csv
+            cut -d';' -f1,2,4,5 hvb.txt | sort -n -t';' -k1 > temp_hvb_comp.txt
             echo "Le tri par Company a été exécuté"
             # Lancement du programme C
             ./yy 
@@ -89,7 +89,7 @@ do
 
     -hva)
         echo "Exécution du tri selon la colonne Station HVA"
-        cut -d';' -f3,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > hva.csv
+        cut -d';' -f3,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > hva.txt
         echo "Le tri selon la colonne Station HVA a été exécuté"
         
         # lance la commande associé au fait de prendre que les colonnes suivantes  HVA / COMPANY / INDIVIDUAL / CAPACITY / LOAD et ressort un tableau nommé hva.csv 
@@ -99,7 +99,7 @@ do
 
         if [[ " $@ " =~ " -comp " ]]; then
             echo "Exécution du tri selon la colonne Company"
-            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_hva_comp.csv
+            cut -d';' -f1,2,4,5 hva.txt | sort -n -t';' -k1 > temp_hva_comp.txt
             echo "Le tri par Company a été exécuté"
             # Lancement du programme C
             ./yy
@@ -113,7 +113,7 @@ do
 
     -lv)
         echo "Exécution du tri selon la colonne Station LV"
-        cut -d';' -f4,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > lv.csv
+        cut -d';' -f4,5,6,7,8 c-wire.csv | sort -n -t';' -k1 > lv.txt
         echo "Le tri selon la colonne Station LV a été exécuté"
         # lance la commande associé au fait de prendre que les colonnes suivantes  LV / COMPANY / INDIVIDUAL / CAPACITY / LOAD et  ressort un tableau nommé lv.csv
         #ORDRE DANS LE LV.CSV
@@ -123,7 +123,7 @@ do
         # On regarde si l'argument -comp est a été inclu dans notre commande
         if [[ " $@ " =~ " -comp " ]]; then
             echo "Exécution du tri selon la colonne Company"
-            cut -d';' -f1,2,4,5 hvb.csv | sort -n -t';' -k1 > temp_lv_comp.csv
+            cut -d';' -f1,2,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_comp.txt
             echo "Le tri par Company a été exécuté"
             # Lancement du programme C
             ./yy
@@ -131,7 +131,7 @@ do
         # On regarde si l'argument -indiv est a été inclu dans notre commande
         elif [[ " $@ " =~ " -indiv " ]]; then
             echo "Exécution du tri selon la colonne Individual"
-            cut -d';' -f1,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_indiv.csv
+            cut -d';' -f1,3,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_indiv.txt
             echo "Le tri selon la colonne Station HVA et selon la colonne individual a été exécuté"
             # Lancement du programme C
             ./yy
@@ -139,7 +139,7 @@ do
         # On regarde si l'argument -all est a été inclu dans notre commande
         elif [[ " $@ " =~ " -all " ]]; then
             echo "Exécution du tri selon la colonne Individual"
-            cut -d';' -f1,2,3,4,5 lv.csv | sort -n -t';' -k1 > temp_lv_all.csv
+            cut -d';' -f1,2,3,4,5 lv.txt | sort -n -t';' -k1 > temp_lv_all.txt
             ./yy
             # Lancement du programme C
             break
