@@ -46,8 +46,8 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-gcc -o yy ~/PartieC/AVL.c
-if  ! yy ~/PartieC/AVL.c; then
+gcc -o yy ~/AVL.c
+if  ! yy ~/AVL.c; then
     echo "Erreur lors de la compilation du programme C."
     exit 1
 fi
