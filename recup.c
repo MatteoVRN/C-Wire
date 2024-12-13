@@ -15,6 +15,7 @@ typedef struct chainon {
 Chainon * creationChainon(int a, int b, int c) {
   Chainon * d = malloc(sizeof(Chainon));
   if (d == NULL) {
+    printf("Erreur d'allocation mémoire.\n");
     exit(1);
   }
   d->ID = a;
@@ -96,23 +97,23 @@ int main(int argc, char *argv[]) {
     // Vérifie quel argument a été passé et fait l'action appropriée
     if (strcmp(arg, "-hvb-comp") == 0) {
         printf("Action pour l'argument -hvb-comp\n");
-        fichier =  fichier1
+        fichier =  fichier1;
     }
     else if (strcmp(arg, "-hva_comp") == 0) {
         printf("Action pour l'argument -hva_comp\n");
-         fichier =  fichier2
+         fichier =  fichier2;
     }
     else if (strcmp(arg, "-lv-comp") == 0) {
         printf("Action pour l'argument -lv-comp\n");
-         fichier =  fichier3
+         fichier =  fichier3;
     }
     else if (strcmp(arg, "-lv-indiv") == 0) {
         printf("Action pour l'argument -lv-indiv\n");
-         fichier =  fichier4
+         fichier =  fichier4;
     }
     else if (strcmp(arg, "-lv-all") == 0) {
         printf("Action pour l'argument -lv-all\n");
-         fichier =  fichier5
+         fichier =  fichier5;
     }
     else {
         printf("Argument inconnu: %s\n", arg);
@@ -128,9 +129,7 @@ int main(int argc, char *argv[]) {
   Chainon * pliste = NULL;
   
   //On récurèpe les données du fichiers et on les insère dans une liste chainée grace à la commande fscanf
-  while (fscanf(fichier, "%d", &a) == 1) {  
-    fscanf(fichier, "%d", &b);
-    fscanf(fichier, "%d", &c);
+  while (fscanf(fichier, "%d %d %d", &a, &b, &c) == 3) {
     pliste = insertDebut(pliste, a, b, c);
   }
 
