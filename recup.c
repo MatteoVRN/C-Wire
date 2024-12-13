@@ -81,7 +81,9 @@ int main(int argc, char *argv[]) {
   FILE* fichier1 = fopen("temp_hvb_comp.txt", "r");
   FILE* fichier2 = fopen("temp_hva_comp.txt", "r");
   FILE* fichier3 = fopen("temp_lv_comp.txt", "r");
-  FILE* fichier4 = fopen("temp_hvb_indiv.txt", "r");
+  FILE* fichier4 = fopen("temp_lv_indiv.txt", "r");
+  FILE* fichier5 = fopen("temp_lv_all.txt", "r");
+  
   
   // Vérifie si un argument a été passé
     if (argc < 2) {
@@ -107,6 +109,10 @@ int main(int argc, char *argv[]) {
     else if (strcmp(arg, "-lv-indiv") == 0) {
         printf("Action pour l'argument -lv-indiv\n");
         * fichier =  &fichier4
+    }
+    else if (strcmp(arg, "-lv-all") == 0) {
+        printf("Action pour l'argument -lv-all\n");
+        * fichier =  &fichier5
     }
     else {
         printf("Argument inconnu: %s\n", arg);
