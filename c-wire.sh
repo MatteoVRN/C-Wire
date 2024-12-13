@@ -44,6 +44,13 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
+gcc -o yy ~/PartieC/AVL.c
+if [ $? -ne 0 ]; then
+    echo "Erreur lors de la compilation du programme C."
+    exit 1
+fi
+#Verification de la presence du programme C.
+
 #ORDRE DANS LE C-WIRE.CSV
 #Power plant;HV-B Station;HV-A Station;LV Station;Company;Individual;Capacity;Load
 #  1          2                 3          4         5         6        7       8
