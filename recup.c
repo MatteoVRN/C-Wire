@@ -120,6 +120,11 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+  if (fichier == NULL) {
+    printf("Erreur d'ouverture du fichier.\n");
+    return 1;
+}
+
   int a;
   int b;
   int c;
