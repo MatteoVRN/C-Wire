@@ -86,7 +86,7 @@ int main() {
   Chainon * pliste = NULL;
 
   //ouverture du fichier
-  fichier = fopen("", "r");
+  fichier1 = fopen("hvb", "r");
 
   //on récurèpe les données du fichiers et on les insère dans une liste chainée grace à la commande fscanf
   while (fscanf(fichier, "%d", &a) == 1) {  
