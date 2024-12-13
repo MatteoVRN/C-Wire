@@ -2,7 +2,7 @@
 
 # Dans l'ensemble du projet on utilise exit 1 comme EXIT FAILURE ce qui indique que la tâche a été interrompue à cause d’une erreur.
 
-file_path=$(find .. -iname "data.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
+file_path=$(find . -iname "data.csv") 2>/dev/null                                                                                                                  #Cette ligne de commande permet de chercher le fichier c-wire.csv dans mes dossiers
 
 Graphs_path=$(find . -type d -name "Graphs" -print -quit) 2>/dev/null                                                                                               #Cette ligne de commande permet de chercher si le dosier Graphs dans mes dossiers
 
