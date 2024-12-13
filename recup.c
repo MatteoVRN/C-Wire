@@ -82,13 +82,17 @@ int main() {
 
   printf("start\n");
 
-  FILE * fichier = NULL;
   Chainon * pliste = NULL;
 
-  //ouverture du fichier
-  fichier1 = fopen("hvb", "r");
+  //Ouverture des fichiers
+  FILE* fichier1 = fopen("temp_hvb_comp.txt", "r");
+  FILE* fichier2 = fopen("temp_hva_comp.txt", "r");
+  FILE* fichier3 = fopen("temp_lv_comp.txt", "r");
+  FILE* fichier4 = fopen("temp_hvb_indiv.txt", "r");
 
-  //on récurèpe les données du fichiers et on les insère dans une liste chainée grace à la commande fscanf
+  
+  
+  //On récurèpe les données du fichiers et on les insère dans une liste chainée grace à la commande fscanf
   while (fscanf(fichier, "%d", &a) == 1) {  
     fscanf(fichier, "%d", &b);
     fscanf(fichier, "%d", &c);
