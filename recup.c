@@ -19,7 +19,7 @@ Chainon * creationChainon(int a, int b, int c) {
   }
   d->ID = a;
   d->capacity = b;
-  d->load=c
+  d->load = c;
   d->next = NULL;
   return d;
 }
@@ -96,31 +96,28 @@ int main(int argc, char *argv[]) {
     // Vérifie quel argument a été passé et fait l'action appropriée
     if (strcmp(arg, "-hvb-comp") == 0) {
         printf("Action pour l'argument -hvb-comp\n");
-        * fichier =  &fichier1
+        fichier =  fichier1
     }
     else if (strcmp(arg, "-hva_comp") == 0) {
         printf("Action pour l'argument -hva_comp\n");
-        * fichier =  &fichier2
+         fichier =  fichier2
     }
     else if (strcmp(arg, "-lv-comp") == 0) {
         printf("Action pour l'argument -lv-comp\n");
-        * fichier =  &fichier3
+         fichier =  fichier3
     }
     else if (strcmp(arg, "-lv-indiv") == 0) {
         printf("Action pour l'argument -lv-indiv\n");
-        * fichier =  &fichier4
+         fichier =  fichier4
     }
     else if (strcmp(arg, "-lv-all") == 0) {
         printf("Action pour l'argument -lv-all\n");
-        * fichier =  &fichier5
+         fichier =  fichier5
     }
     else {
         printf("Argument inconnu: %s\n", arg);
         return 1;
     }
-
-    return 0;
-}
 
   int a;
   int b;
@@ -137,4 +134,7 @@ int main(int argc, char *argv[]) {
     pliste = insertDebut(pliste, a, b, c);
   }
 
+  fclose(fichier);
+  
+  return 0;
 }
